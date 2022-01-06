@@ -1,0 +1,71 @@
+Twitter Clone(Backend)
+
+The following assignment makes use of SpringBoot, JAVA and PostgreSQL for the backend support and database.
+For the project I have used MVC(Model, View, Controller) structure.
+
+Schema of DB:
+users  table : 
+
+Id: Serially generated number to give id to user.
+Name : This consist name of user and is of type varchar.
+Username : This consist of username of  user, it cannot be null and is primary key for this     table and is of type varchar.
+Password : This consist of password and is of type varchar.
+Confirm_password : This consist confirmation of password and is of type varchar.
+
+follow table :
+
+Username : This is foreign key of this table and is of type varchar.
+Followers : This  consists of all the followers of that user and is of type jsonb.
+Followings : This  consists of all the followings of that user and is of type jsonb.
+
+tweet table :
+
+Username : This is foreign key of this table and is of type varchar.
+Tweet : This consist of tweets made by  user and is of type varchar.
+createdAt : now() is used to store the time when the tweet was made and data type is datetime. 
+
+
+
+API documentation :
+
+Sign In
+
+API : “{baseurl}/signup”
+Method : “POST”
+
+The /signup API accepts a request body of the entity of type signup. 
+The signup entity has the following fields : 
+1.	Name
+2.	Username
+3.	Password
+4.	Confirm_Password
+	
+	The password is encrypted using aes256 algorithm to keep it secure.
+
+Log In
+API : {baseurl}/login
+Method : “GET”
+
+The /login API accepts a request body of the entity of type login.
+The login entity has the following fields : 
+1.	Username
+2.	Password   
+	
+Follow 
+	API : {baseurl}/follow/{toUserId}/{byUserId}
+	Method : “POST”
+
+	The /follow/{toUserId}/{byUserId} accepts two path params i.e. the user id to which is to be followed and the user which is going to follow.
+
+Show tweets
+	API : {baseurl}/showtweets/{userId}
+	Method : “GET”
+
+	The showtweets/{userId} accepts a path param that is the user id to show all the tweets by the people this user follows ordered by in descending order of when they were created that is from newest to oldest.
+
+Add Tweet
+	API : {baseurl}/addtweet
+	Mehotd : “POST”
+	
+The add tweet allows the user to make a tweet of no more than140 characters.
+
